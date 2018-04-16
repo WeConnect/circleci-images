@@ -111,7 +111,7 @@ jobs:
       - checkout
       - run:
           name: Docker Login
-          command: docker login -u $DOCKER_USER -p $DOCKER_PASS
+          command: docker login $DOCKER_REGISTRY -u $DOCKER_USER -p $DOCKER_PASSWD
       - run:
           name: Build and Publish Images
           command: |
@@ -127,93 +127,93 @@ jobs:
           path: "."
           destination: circleci-bundles
 
-  publish_android:
-    <<: *publish_image
-    environment:
-      - PLATFORM: android
+  # publish_android:
+  #   <<: *publish_image
+  #   environment:
+  #     - PLATFORM: android
 
-  publish_node:
-    <<: *publish_image
-    environment:
-      - PLATFORM: node
+  # publish_node:
+  #   <<: *publish_image
+  #   environment:
+  #     - PLATFORM: node
 
-  publish_python:
-    <<: *publish_image
-    parallelism: 2
-    environment:
-      - PLATFORM: python
+  # publish_python:
+  #   <<: *publish_image
+  #   parallelism: 2
+  #   environment:
+  #     - PLATFORM: python
 
   publish_ruby:
     <<: *publish_image
     environment:
       - PLATFORM: ruby
 
-  publish_golang:
-    <<: *publish_image
-    environment:
-      - PLATFORM: golang
+  # publish_golang:
+  #   <<: *publish_image
+  #   environment:
+  #     - PLATFORM: golang
 
-  publish_php:
-    <<: *publish_image
-    parallelism: 3
-    environment:
-      - PLATFORM: php
+  # publish_php:
+  #   <<: *publish_image
+  #   parallelism: 3
+  #   environment:
+  #     - PLATFORM: php
 
-  publish_redis:
-    <<: *publish_image
-    environment:
-      - PLATFORM: redis
+  # publish_redis:
+  #   <<: *publish_image
+  #   environment:
+  #     - PLATFORM: redis
 
-  publish_postgres:
-    <<: *publish_image
-    environment:
-      - PLATFORM: postgres
+  # publish_postgres:
+  #   <<: *publish_image
+  #   environment:
+  #     - PLATFORM: postgres
 
-  publish_mariadb:
-    <<: *publish_image
-    environment:
-      - PLATFORM: mariadb
+  # publish_mariadb:
+  #   <<: *publish_image
+  #   environment:
+  #     - PLATFORM: mariadb
 
-  publish_mysql:
-    <<: *publish_image
-    environment:
-      - PLATFORM: mysql
+  # publish_mysql:
+  #   <<: *publish_image
+  #   environment:
+  #     - PLATFORM: mysql
 
-  publish_mongo:
-    <<: *publish_image
-    environment:
-      - PLATFORM: mongo
+  # publish_mongo:
+  #   <<: *publish_image
+  #   environment:
+  #     - PLATFORM: mongo
 
-  publish_elixir:
-    <<: *publish_image
-    environment:
-      - PLATFORM: elixir
+  # publish_elixir:
+  #   <<: *publish_image
+  #   environment:
+  #     - PLATFORM: elixir
 
-  publish_rust:
-    <<: *publish_image
-    environment:
-      - PLATFORM: rust
+  # publish_rust:
+  #   <<: *publish_image
+  #   environment:
+  #     - PLATFORM: rust
 
-  publish_jruby:
-    <<: *publish_image
-    environment:
-      - PLATFORM: jruby
+  # publish_jruby:
+  #   <<: *publish_image
+  #   environment:
+  #     - PLATFORM: jruby
 
-  publish_clojure:
-    <<: *publish_image
-    environment:
-      - PLATFORM: clojure
+  # publish_clojure:
+  #   <<: *publish_image
+  #   environment:
+  #     - PLATFORM: clojure
 
-  publish_openjdk:
-    <<: *publish_image
-    environment:
-      - PLATFORM: openjdk
+  # publish_openjdk:
+  #   <<: *publish_image
+  #   environment:
+  #     - PLATFORM: openjdk
 
-  publish_buildpack-deps:
-    <<: *publish_image
-    parallelism: 2
-    environment:
-      - PLATFORM: buildpack-deps
+  # publish_buildpack-deps:
+  #   <<: *publish_image
+  #   parallelism: 2
+  #   environment:
+  #     - PLATFORM: buildpack-deps
 
 workflow_filters: &workflow_filters
   requires:
@@ -224,6 +224,7 @@ workflow_filters: &workflow_filters
         - master
         - production
         - parallel
+  context: org-global
 
 workflows:
   version: 2
